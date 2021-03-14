@@ -38,7 +38,7 @@ workflows:
         - katalon-studio/run:
                 version: "latest"
                 command_arguments: '-browserType="Chrome" -retry=2 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"'
-      - test
-      - upload-report:
+        - test
+        - upload-report:
           requires:
             - test
