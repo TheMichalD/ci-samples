@@ -1,10 +1,14 @@
 version: 2.1
-orbs:
-    katalon-studio: katalon/katalon-studio@23.0.11
-    
-workflows:
-  build:
-    jobs:
-        - katalon-studio/run:
-                version: "latest"
-                command_arguments: '-browserType="Chrome" -retry=2 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"'
+jobs:
+ build:
+  docker: 
+   - katalonstudio/katalon
+  steps:
+   - checkout
+   - run:
+   		name: Execute Katalon Studio
+   		command: katalon-execute.sh -browserType="Chrome" -retry=2 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"
+   - store-test_results:
+   		path: ./report
+   - store-artifacts:
+   		path: ./report
